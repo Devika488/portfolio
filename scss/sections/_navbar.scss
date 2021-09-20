@@ -1,0 +1,25 @@
+
+// @use '../custom' as c;
+@use '../components/mixins' as *;
+
+.menu-bar{
+@include gradient;
+li{
+    padding: 0 .7rem;
+
+    a{
+        color: white!important;
+        text-transform:capitalize;
+
+        &:hover{
+            @include gradient;
+            
+
+        }   
+      
+    }
+    
+}
+
+
+    }

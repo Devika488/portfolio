@@ -1,0 +1,26 @@
+@use '../custom' as *;
+
+
+.h1-intro{
+    margin: auto;
+    font-family: 'Poppins', sans-serif;
+    // color: white;
+
+    &-head{
+        display: inline-block;
+        font-weight: 700;
+        text-transform: capitalize;
+    }
+
+    &-des{
+        font-size: 1rem;
+        display: block;
+        // font-weight: 0;
+        margin: 1rem 0 1rem 0;
+        @include media-breakpoint-up(lg){
+            font-size: 1.3rem;
+            // display: inline-block;
+        }
+    }
+   
+}

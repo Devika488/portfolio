@@ -1,0 +1,12 @@
+@use '../scss/custom';
+
+//import components
+@use '../scss/components/mixins';
+@use '../scss/components/buttons';
+@use '../scss/components/typography';
+@use '../scss/components/animation';
+
+//import sections
+
+@use '../scss/sections/navbar';
+@use '../scss/sections/intro'
