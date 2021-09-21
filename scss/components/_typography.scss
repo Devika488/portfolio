@@ -1,26 +1,94 @@
 @use '../custom' as *;
+@use '../components/mixins' as *;
 
+.h1-intro {
+  margin: auto;
+  font-family: "Poppins", sans-serif;
+  // color: white;
 
-.h1-intro{
-    margin: auto;
-    font-family: 'Poppins', sans-serif;
-    // color: white;
+  &-head {
+    display: inline-block;
+    font-weight: 700;
+    text-transform: capitalize;
+  }
 
-    &-head{
-        display: inline-block;
-        font-weight: 700;
-        text-transform: capitalize;
+  &-des {
+    font-size: 1rem;
+    display: block;
+    // font-weight: 0;
+    margin: 1rem 0 1rem 0;
+    @include media-breakpoint-up(lg) {
+      font-size: 1.3rem;
+      // display: inline-block;
     }
+  }
+}
 
-    &-des{
-        font-size: 1rem;
-        display: block;
-        // font-weight: 0;
-        margin: 1rem 0 1rem 0;
-        @include media-breakpoint-up(lg){
-            font-size: 1.3rem;
-            // display: inline-block;
-        }
-    }
+.heading-line::before {
+  content: "";
+  width: 10rem;
+  height: 0.1rem;
+  background-color: $primary;
+  display: block;
+  margin: 0 auto;
+}
+.heading-line::after {
+  content: "";
+  width: 2rem;
+  height: 0.1rem;
+  background-color: $primary;
+  display: block;
+  margin: 0 auto 2rem;
+  padding-top: 0.5rem;
+}
+// .test-line::before{               ////////// testimonial line
+// content: '';
+// width: 10rem;
+// height: .2rem;
+// background-color: white;
+// display: block;
+// margin:0 auto;
+// margin-bottom: 10rem;
+// }
+
+.service_content {
+    @include media-breakpoint-up(md){
+    padding-top: 6rem;}
+  .service-title {
+    @include text-color;
    
+  }
+  p{
+    line-height: 2rem;
+}
+}
+.quote{
+    background-color: hsl(300, 62%, 85%);
+    padding:2rem 2rem 4rem;
+    border-radius: 1rem;
+    
+   span{
+    i{
+        color: $primary;
+        font-size: 2rem;
+    }
+   }
+   .ratings{
+       color:$primary;
+       padding-top: .3rem;
+       padding-bottom: .3rem;
+   }
+  
+}
+.profile {
+    // @include media-breakpoint-down(md){
+    //     padding-top: 1rem;
+    // }
+  margin-top: -4rem;
+    img{
+        border: $primary .5rem solid;
+        width: 7rem;
+        height: auto;
+        // padding-top: 1rem;
+    }
 }

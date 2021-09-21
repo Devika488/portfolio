@@ -1,0 +1,7 @@
+@use '../components/mixins' as *;
+
+
+.testimonial{
+
+    @include gradient;
+}

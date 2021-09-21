@@ -1,48 +1,63 @@
-
 @use '../custom' as *;
 @use './mixins' as *;
 
+.btn-rounded {
+  @include media-breakpoint-down(sm) {
+    display: none;
+  }
+  background-color: white;
+  padding: 0.9375rem 4.375rem 0.9375rem 1.25rem;
+  font-weight: 500;
+  margin: 0;
+  border: 0.1rem solid $white;
+  box-sizing: border-box;
 
-.btn-rounded{
-    @include media-breakpoint-down(sm){
-        display: none;
-    }
-    background-color: white;
-    padding: .9375rem 4.375rem .9375rem 1.25rem ;
-    font-weight: 500;
-    margin: 0;
-    border: .1rem solid $white;
-    box-sizing: border-box;
+  span {
+    position: absolute;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: $primary;
+    border-radius: 50%;
+    margin-top: -0.5rem;
+    margin-left: 1rem;
+    // top:.1%;
+    // bottom: 5%;
+    // right: 9%;
+    // transform: translateY(-50%);
 
-
-    span{
-        position:absolute;
-        width:2.5rem;
-        height: 2.5rem;
-        background-color: $primary;
-        border-radius: 50%;
-        margin-top:-.5rem;
-        margin-left: 1rem;
-        // top:.1%;
-        // bottom: 5%;
-        // right: 9%;
-        // transform: translateY(-50%);
-
-
-        .icon{
-            color: white;
-            margin-top: .75rem;
-            // transform:rotateX(180);
-        }
-
+    .icon {
+      color: white;
+      margin-top: 0.75rem;
+      // transform:rotateX(180);
     }
 
-    &:hover{
-            @include gradient;
-            color: $white;
-            span{
-                background-color: rgba(black,.3);
-            }
-    }
+  }
+  
 
+  &:hover {
+    @include gradient;
+    color: $white;
+    span {
+      background-color: rgba(black, 0.3);
+    }
+  }
 }
+.marketing-button{
+    border:.1rem solid $primary;
+}
+.service_content {
+  span {
+    // width: 5rem;
+    // height: 5rem;
+    .icon1 {
+      @include icon-color;
+
+    //   margin-top: 0.75rem;
+    }
+  }
+}
+// .carous{                                               ////////////////////carousel beside testimony
+//     @include media-breakpoint-down(md){
+//         padding-left: 5rem;
+//     }
+// }

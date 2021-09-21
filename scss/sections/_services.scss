@@ -1,0 +1,11 @@
+@use '../custom' as *;
+
+
+
+    .Lorem{
+        @include media-breakpoint-down(md){
+            border-left: none;
+        }
+        border-left: .1rem solid rgb(218, 214, 214);
+        // border-left: 5rem solid gray ;
+    }
