@@ -92,3 +92,33 @@
         // padding-top: 1rem;
     }
 }
+.port_img{
+  .portb{
+   
+    .port-project-name{
+      opacity: 0;
+      text-transform: uppercase;
+      .portbox{
+    
+        padding-top:5rem;
+        // left:25%;
+        // right:25%;
+        // position: absolute;
+        // transform: translate(-1%,-10%);
+      }
+    }
+    &:hover{
+      padding-left: 0;
+      padding-right: 0;
+      // overflow-x: hidden;
+      img{
+        transform: scale(1.5);
+        transition-duration: 1000ms;
+        transition-property: all;
+      }
+      .port-project-name{
+    opacity: 1;
+    }
+    }
+  }
+}
