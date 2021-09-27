@@ -11201,7 +11201,7 @@ textarea.form-control-lg {
 }
 .service_content .service-title {
   font-weight: 600;
-  background-image: linear-gradient(to right, #9926f0, red);
+  background-image: linear-gradient(to right, #9926f0, #d122e3);
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
 }
@@ -11251,6 +11251,78 @@ textarea.form-control-lg {
 }
 .port_img .portb:hover .port-project-name {
   opacity: 1;
+}
+
+.form form {
+  padding: 5rem 4rem 1rem;
+}
+.form form p {
+  font-weight: 600;
+  background-image: linear-gradient(to right, #9926f0, #d122e3);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+.form form .button {
+  height: 4rem;
+  background: #9926f0;
+}
+.form form .button:hover {
+  background: #d122e3;
+}
+
+.foot .icon-details .a {
+  color: #fff;
+  text-decoration: none;
+}
+.foot .icon-details .a:hover {
+  color: #9926f0;
+}
+.foot .icon-details .date {
+  color: rgba(221, 218, 218, 0.74);
+}
+
+.foot-2 {
+  background-color: #353434;
+}
+.foot-2 .social {
+  color: #fff;
+}
+.foot-2 .social i {
+  font-size: 1.7rem;
+  padding-right: 1rem;
+}
+.foot-2 .social i:hover {
+  color: #9926f0;
+}
+
+.foot-3 {
+  color: #fff;
+}
+.foot-3 ul {
+  list-style: none;
+  padding: 0;
+  text-transform: capitalize;
+}
+.foot-3 ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+.foot-3 ul li a:hover {
+  color: #9926f0;
+}
+
+.copy {
+  background-color: black;
+}
+.copy p {
+  color: gray;
+}
+.copy p a {
+  color: #fff;
+  text-decoration: none;
+}
+.copy p a:hover {
+  color: #9926f0;
 }
 
 @keyframes pulse {
@@ -11362,6 +11434,15 @@ textarea.form-control-lg {
   position: absolute;
   transform: translate(-50%, -50%);
   font-size: 1.5rem;
+}
+
+.form {
+  background-color: #e9ecef;
+  padding-bottom: 4rem;
+}
+.form .satisfaction {
+  background: linear-gradient(to right, rgba(153, 38, 240, 0.95), rgba(209, 34, 227, 0.95));
+  padding-bottom: 5rem;
 }
 
 /*# sourceMappingURL=style.css.map */

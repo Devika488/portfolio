@@ -122,3 +122,91 @@
     }
   }
 }
+.form{
+  form{
+    padding:5rem 4rem 1rem;
+
+    p{
+      @include text-color;
+    }
+    .button{
+      height: 4rem;
+      background: $primary;
+      &:hover{
+        background:rgba($secondary,1);
+    }
+    }
+  }
+}
+
+.foot{
+  // .footer_icon{
+    // font-size: 3rem;
+    // color: $primary;
+  // }
+//  .footer_icon{
+//    @include media-breakpoint-down(sm){
+//      width:3rem;
+//      position: relative;
+
+//    }
+//  }
+  .icon-details{
+    .a{
+      color: $white;
+      text-decoration: none;
+      &:hover{
+        color: $primary;
+      }
+    }
+    .date{
+      color: rgba(221, 218, 218, 0.74);
+    }
+  }
+}
+.foot-2{
+  background-color:#353434;
+  
+  .social{
+    color:$white;
+    i{
+      font-size: 1.7rem;
+      padding-right: 1rem;
+      &:hover{
+        color: $primary;
+      }
+    }
+  }
+}
+.foot-3{
+  color: $white;
+  ul{
+    list-style: none;
+    padding: 0;
+    text-transform: capitalize;
+    li{
+      a{
+        color: $white;
+        text-decoration: none;
+        &:hover{
+          color: $primary;
+        }
+      }
+    }
+  }
+
+}
+.copy{
+  background-color: black;
+    p{
+      color: gray;
+      a{
+        color: $white;
+        text-decoration: none;
+        &:hover{
+          color: $primary;
+        }
+      }
+    }
+  
+}

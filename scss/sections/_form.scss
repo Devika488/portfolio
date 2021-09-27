@@ -1,0 +1,12 @@
+@use '../components/mixins' as *;
+@use '../custom' as *;
+
+.form{
+    background-color: $gray-200;
+    padding-bottom: 4rem;
+    .satisfaction{
+        @include gradient;
+        padding-bottom: 5rem;
+    }
+
+}
