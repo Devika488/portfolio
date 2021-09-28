@@ -813,7 +813,7 @@
             </div>
           </div>
           <div class="col-md-6 shadow bg-white">
-            <form id="myForm" name="myForm">
+            <form id="myForm" name="myForm" action="index.html#myForm">
               <p class="fs-2 mb-5">Start Your Project</p>
              <div class="row ">
               <div class="col-lg-6 input-group-lg mb-3"><input type="text" name="First Name" class="input-text form-control shadow"  placeholder="First Name" pattern="[a-zA-Z]{2,}" title="Enter a valid name" required></div>
@@ -998,7 +998,7 @@
           }
           else {
            
-               document.querySelector('#resultmsg').innerText="Please provide a valid Message !";
+               alert("Please provide a valid Message !");
               }
         }
         else{
@@ -1012,7 +1012,19 @@
         }
         }
         else{
-          document.querySelector('#result').innerText="Please provide a valid email address !";
+          if(document.querySelector('#Message').value.trim().length>0)
+          {
+            if(checkMessage()){
+              alert("Please provide a valid email address !");
+            }
+            else{
+              alert("Please provide a valid email address and Message !");
+            }
+          }
+          else{
+            alert("Please provide a valid email address !");
+          }
+          
         }
       });
     </script>
