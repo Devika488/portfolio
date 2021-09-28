@@ -15,8 +15,10 @@ function checkEmail() {
     email.focus;
     return false;
     }
+   else{
     document.querySelector('#result').innerText=" ";
-    
+    return true;
+   }
     
     }
        
@@ -34,6 +36,6 @@ function checkEmail() {
                     return false;
       
         }
-        document.querySelector('#resultmsg').innerText=" ";
-
+        // document.querySelector('#resultmsg').innerText=" ";
+        return true;
         }

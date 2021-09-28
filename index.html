@@ -828,7 +828,7 @@
               <div class="col-12 input-group-lg mb-3"><textarea name="Message" id="Message" rows="6" class=" input-text form-control shadow" placeholder="message" onchange="checkMessage()"></textarea>
                 <h2 class="text-danger fs-6" id="resultmsg" style="visibility: hidden;">Please provide a valid Message !</h2>
               </div>
-              <div class="col-12 input-group-lg mb-1 "><button class=" btn button rounded-pill w-100 text-white fs-5">Submit <span><i class="fa fa-paper-plane"></i></span></button></div>
+              <div class="col-12 input-group-lg mb-1 "><button class=" btn button rounded-pill w-100 text-white fs-5" type="submit">Submit <span><i class="fa fa-paper-plane"></i></span></button></div>
             </div>
             </form>
           </div>
@@ -969,15 +969,51 @@
         "https://script.google.com/macros/s/AKfycbwJp2SWqRut3rybooJdQtYEFUWrbpZlvtDSOGc5htBYJ-Cmj4_vd3AhhC_euPTXR_Au/exec";
       const form = document.forms["myForm"];
 
+      // form.addEventListener("submit", (e) => {
+      //   e.preventDefault();
+      //   fetch(scriptURL, { method: "POST", body: new FormData(form) })
+      //     .then((response) => console.log("Success!", response))
+      //     .catch((error) => console.error("Error!", error.message));
+
+      //     alert("Details successfully entered!...");
+      //     document.getElementById("myForm").reset();
+          
+      // });
+
+
+
       form.addEventListener("submit", (e) => {
-        e.preventDefault();
+        if(checkEmail()){
+          if(document.querySelector('#Message').value.trim().length>0){
+
+            if(checkMessage()){
+              // alert(document.querySelector('#Message').value);
+            e.preventDefault();
         fetch(scriptURL, { method: "POST", body: new FormData(form) })
           .then((response) => console.log("Success!", response))
           .catch((error) => console.error("Error!", error.message));
 
           alert("Details successfully entered!...");
           document.getElementById("myForm").reset();
-          
+          }
+          else {
+           
+               document.querySelector('#resultmsg').innerText="Please provide a valid Message !";
+              }
+        }
+        else{
+          e.preventDefault();
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then((response) => console.log("Success!", response))
+          .catch((error) => console.error("Error!", error.message));
+
+          alert("Details successfully entered!...");
+          document.getElementById("myForm").reset();
+        }
+        }
+        else{
+          document.querySelector('#result').innerText="Please provide a valid email address !";
+        }
       });
     </script>
         
