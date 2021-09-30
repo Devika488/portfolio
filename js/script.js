@@ -57,6 +57,9 @@ function checkEmail() {
             return true;
         }
         else{
+            // document.querySelector('#urllink').placeholder = "Completed Project url ,if any";
+            document.querySelector('#urllink').value=" ";
+            url.focus;
             document.querySelector('#resulturl').style.visibility="visible";
             return false;
         }
