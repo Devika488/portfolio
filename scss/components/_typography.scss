@@ -126,9 +126,10 @@
   form{
     padding:5rem 4rem 1rem;
 
-    p{
+    p,label{
       @include text-color;
     }
+    
     .button{
       height: 4rem;
       background: $primary;

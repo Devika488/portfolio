@@ -11256,7 +11256,7 @@ textarea.form-control-lg {
 .form form {
   padding: 5rem 4rem 1rem;
 }
-.form form p {
+.form form p, .form form label {
   font-weight: 600;
   background-image: linear-gradient(to right, #9926f0, #d122e3);
   -webkit-text-fill-color: transparent;
@@ -11447,9 +11447,16 @@ textarea.form-control-lg {
 .form .input-text {
   text-transform: capitalize;
 }
+.form .notsuccess {
+  top: -4.65rem;
+}
 
 input:invalid, textarea:invalid {
-  border-color: #9926f0;
+  border-color: red;
+}
+
+.iti {
+  width: 100%;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -25,9 +25,13 @@ function checkEmail() {
 
     // function textarea
     function checkMessage(){
+        // alert("kooi");
         let msg = document.querySelector('#Message').value.trim();
-        if(!msg.match(/^[A-za-z].[^]+$/) || msg.length<0){
-          
+        if(msg.match(/^.*[a-zA-Z].*$/)){
+            document.querySelector('#resultmsg').style.visibility="hidden";
+
+            return true;}
+            else{
             // document.querySelector('#resultmsg').innerText="Please provide a valid Message !";
             
             document.querySelector('#resultmsg').style.visibility="visible";
@@ -37,5 +41,9 @@ function checkEmail() {
       
         }
         // document.querySelector('#resultmsg').innerText=" ";
-        return true;
+       
+        }
+        //
+        function savefile(){
+            alert(document.getElementById('formFile').value);
         }

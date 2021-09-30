@@ -11,11 +11,13 @@
 .input-text{
     text-transform: capitalize;
 }
+.notsuccess{
+    top: -4.65rem;
+}
 }
 input:invalid,textarea:invalid{
-	border-color: $primary;
+	border-color: red;
 }   
-// textarea:invalid{
-// // @extend input:invalid;
-// border: .1rem solid $primary;
-// }
+.iti{
+    width: 100%;
+}

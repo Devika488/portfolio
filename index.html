@@ -20,6 +20,10 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+    />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light menu-bar shadow">
@@ -790,7 +794,7 @@
     <!-- form section -->
     <section class="form">
       <div class="container">
-        <div class="row pt-5 ">
+        <div class="row pt-5">
           <h1 class="display-3 fw-bold text-center mb-3">Get Started</h1>
           <div class="heading-line"></div>
           <p class="lead text-center mb-4">
@@ -801,35 +805,216 @@
         <div class="row started">
           <div class="col-md-6 shadow satisfaction text-white">
             <div class="p-5">
-              <h4 class="fw-bold display-3 mb-3 mt-5">100% Satisfaction Guaranteed</h4>
-              <p class="lh-lg mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam alias optio minima, tempore architecto sint ipsam dolore tempora facere laboriosam corrupti!</p>
+              <h4 class="fw-bold display-3 mb-3 mt-5">
+                100% Satisfaction Guaranteed
+              </h4>
+              <p class="lh-lg mb-3">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam
+                alias optio minima, tempore architecto sint ipsam dolore tempora
+                facere laboriosam corrupti!
+              </p>
               <h5 class="fs-3 mb-3">What will be the next step?</h5>
-              <ul class="fa-ul"><li class="mb-1"><span class="fa-li"><i class="fas fa-check"></i> </span>We'll prepare the proposal.
-              </li>
-              <li class="mb-1"><span class="fa-li"><i class="fas fa-check"></i> </span>we'll discuss it together.
-              </li>
-              <li class="mb-1"><span class="fa-li"><i class="fas fa-check"></i> </span>let's start the discussion.
-              </li></ul>
+              <ul class="fa-ul">
+                <li class="mb-1">
+                  <span class="fa-li"><i class="fas fa-check"></i> </span>We'll
+                  prepare the proposal.
+                </li>
+                <li class="mb-1">
+                  <span class="fa-li"><i class="fas fa-check"></i> </span>we'll
+                  discuss it together.
+                </li>
+                <li class="mb-1">
+                  <span class="fa-li"><i class="fas fa-check"></i> </span>let's
+                  start the discussion.
+                </li>
+              </ul>
             </div>
           </div>
           <div class="col-md-6 shadow bg-white">
-            <form id="myForm" name="myForm" action="index.html#myForm">
+            <form
+              id="myForm"
+              name="myForm"
+              method="POST"
+              action="index.html#myForm"
+            >
               <p class="fs-2 mb-5">Start Your Project</p>
-             <div class="row ">
-              <div class="col-lg-6 input-group-lg mb-3"><input type="text" name="First Name" class="input-text form-control shadow"  placeholder="First Name" pattern="[a-zA-Z]{2,}" title="Enter a valid name" required></div>
-              <div class="col-lg-6 input-group-lg mb-3">  <input type="text" name="Last Name" class= " input-text form-control shadow"  placeholder="Last Name" pattern="[a-zA-z].[a-z .A-Z]+" title="Enter a valid name" required></div>
-             </div>
-            <div class="row">
-              <div class="col-12 input-group-lg mb-3"><input type="email" name="E-mail" id="email" class="form-control shadow" onchange="checkEmail()" placeholder="email address" required>
-                <h2 class="text-danger fs-6" id="result"></h2>
+              <div class="row">
+                <div class="col-lg-6 input-group-lg mb-3">
+                  <input
+                    type="text"
+                    name="First Name"
+                    class="input-text form-control shadow"
+                    placeholder="First Name"
+                    pattern="[^-\s][a-zA-Z ]{2,}"
+                    title="Enter a valid name"
+                    required
+                  />
+                </div>
+                <div class="col-lg-6 input-group-lg mb-3">
+                  <input
+                    type="text"
+                    name="Last Name"
+                    class="input-text form-control shadow"
+                    placeholder="Last Name"
+                    pattern="[a-zA-z].[a-z .A-Z]+"
+                    title="Enter a valid name"
+                    required
+                  />
+                </div>
               </div>
-              <div class="col-12 input-group-lg mb-3"><input type="tel" name="Ph. Number" id="number" class="form-control shadow" placeholder="Phone Number (xxx-xxx-xxxx)" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="Enter a valid phone number" required>
+              <div class="row">
+                <div class="col-12 d-flex input-group-lg mb-3">
+                  <p class="fs-3 pe-3">Gender</p>
+                  <div class="form-check form-check-inline mt-2 pt-1">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="Gender"
+                      id="female"
+                      value="female"
+                    />
+                    <label class="form-check-label" for="female">Female</label>
+                  </div>
+                  <div class="form-check form-check-inline mt-2 pt-1">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="Gender"
+                      id="male"
+                      value="male"
+                      required
+                    />
+                    <label class="form-check-label" for="male">Male</label>
+                  </div>
+                </div>
+                <div class="col-12 input-group-lg mb-3">
+                  <input
+                    type="email"
+                    name="E-mail"
+                    id="email"
+                    class="form-control shadow"
+                    onchange="checkEmail()"
+                    placeholder="email address"
+                    required
+                  />
+                  <h2 class="text-danger fs-6" id="result"></h2>
+                </div>
+
+                <div class="col-12 input-group-lg mb-3">
+                  <input
+                    type="tel"
+                    name="Number"
+                    id="phone"
+                    class="form-control shadow"
+                    onchange="insno()"
+                    required
+                  />
+                  <!-- <p class="visually-hidden" id="tel" name="tel">dshghfdfud</p> -->
+                  <h2 class="text-danger fs-6" id="resultno"></h2>
+
+                  <input type="hidden" name="ph. Number" id="ph" value="" />
+                </div>
+                <div class="col-12 input-group-lg">
+                  <textarea
+                    name="Message"
+                    id="Message"
+                    rows="6"
+                    class="input-text form-control shadow"
+                    onchange="checkMessage()"
+                    placeholder="message"
+                  ></textarea>
+                  <h2
+                    class="text-danger fs-6"
+                    id="resultmsg"
+                    style="visibility: hidden"
+                  >
+                    Please provide a valid Message !
+                  </h2>
+                </div>
+                <input type="hidden" name="url" id="url" value="" />
+                <div class="col-12">
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label"
+                      >Project Template</label
+                    >
+                    <input
+                      class="form-control"
+                      type="file"
+                      name="Doc"
+                      onchange="savefile()"
+                      id="formFile"
+                      accept="application/pdf, application/vnd.ms-excel"
+                    />
+                  </div>
+                </div>
+                <div class="col-12 input-group-lg mb-1">
+                  <button
+                    class="btn button rounded-pill w-100 text-white fs-5"
+                    type="submit"
+                  >
+                    Submit <span><i class="fa fa-paper-plane"></i></span>
+                  </button>
+                </div>
               </div>
-              <div class="col-12 input-group-lg mb-3"><textarea name="Message" id="Message" rows="6" class=" input-text form-control shadow" placeholder="message" onchange="checkMessage()"></textarea>
-                <h2 class="text-danger fs-6" id="resultmsg" style="visibility: hidden;">Please provide a valid Message !</h2>
+              <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+                <symbol
+                  id="check-circle-fill"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"
+                  />
+                </symbol>
+                <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                  <path
+                    d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"
+                  />
+                </symbol>
+                <symbol
+                  id="exclamation-triangle-fill"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+                  />
+                </symbol>
+              </svg>
+              <div
+                class="alert alert-success mt-3 d-flex align-items-center"
+                role="alert"
+                id="success"
+                style="visibility: hidden"
+              >
+                <svg
+                  class="bi flex-shrink-0 me-2"
+                  width="24"
+                  height="24"
+                  role="img"
+                  aria-label="Success:"
+                >
+                  <use xlink:href="#check-circle-fill" />
+                </svg>
+                <div>Data successfully saved</div>
               </div>
-              <div class="col-12 input-group-lg mb-1 "><button class=" btn button rounded-pill w-100 text-white fs-5" type="submit">Submit <span><i class="fa fa-paper-plane"></i></span></button></div>
-            </div>
+              <div
+                class="alert alert-danger notsuccess d-flex align-items-center"
+                role="alert"
+                id="danger"
+                style="visibility: hidden"
+              >
+                <svg
+                  class="bi flex-shrink-0 me-2"
+                  width="24"
+                  height="24"
+                  role="img"
+                  aria-label="Danger:"
+                >
+                  <use xlink:href="#exclamation-triangle-fill" />
+                </svg>
+                <div id="errmsg"></div>
+              </div>
             </form>
           </div>
         </div>
@@ -839,110 +1024,171 @@
     <footer class="bg-dark">
       <div class="container">
         <div class="row foot pt-5">
-       <div class="d-flex col-md-4"> <div class="footer_icon "><svg xmlns="http://www.w3.org/2000/svg" class="icon  icon-tabler icon-tabler-phone-call" width="63" height="63" viewBox="0 0 24 24" stroke-width="1.5" stroke="#6f32be" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
-        <path d="M15 7a2 2 0 0 1 2 2" />
-        <path d="M15 3a6 6 0 0 1 6 6" />
-      </svg></div>
-       <div class="icon-details">
-         <a href="#" class="a">+1 728365413</a>
-         <p class="date">Mon-Fri 9am-6pm</p>
-       </div></div>
-       <div class="d-flex col-md-4"> <div class="footer_icon "><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail-opened" width="63" height="63" viewBox="0 0 24 24" stroke-width="1.5" stroke="#6f32be" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <polyline points="3 9 12 15 21 9 12 3 3 9" />
-        <path d="M21 9v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10" />
-        <line x1="3" y1="19" x2="9" y2="13" />
-        <line x1="15" y1="13" x2="21" y2="19" />
-      </svg></div>
-       <div class="icon-details">
-         <a href="#" class="a">+1 728365413</a>
-         <p class="date">Mon-Fri 9am-6pm</p>
-       </div></div>
-       <div class="d-flex col-md-4"> <div class="footer_icon "><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-map-2" width="63" height="63" viewBox="0 0 24 24" stroke-width="1.5" stroke="#6f32be" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <line x1="18" y1="6" x2="18" y2="6.01" />
-        <path d="M18 13l-3.5 -5a4 4 0 1 1 7 0l-3.5 5" />
-        <polyline points="10.5 4.75 9 4 3 7 3 20 9 17 15 20 21 17 21 15" />
-        <line x1="9" y1="4" x2="9" y2="17" />
-        <line x1="15" y1="15" x2="15" y2="20" />
-      </svg></div>
-       <div class="icon-details">
-         <a href="#" class="a">+1 728365413</a>
-         <p class="date">Mon-Fri 9am-6pm</p>
-       </div></div>
-        </div>
-        </div>
-        <div class=" foot-2 ">
-          <div class="container">
-                  <div class="row text-center pt-3 pb-3 ">
-          <div class="col-md-6 text-white mb-1">connect with us on social media
+          <div class="d-flex col-md-4">
+            <div class="footer_icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-phone-call"
+                width="63"
+                height="63"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="#6f32be"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"
+                />
+                <path d="M15 7a2 2 0 0 1 2 2" />
+                <path d="M15 3a6 6 0 0 1 6 6" />
+              </svg>
+            </div>
+            <div class="icon-details">
+              <a href="#" class="a">+1 728365413</a>
+              <p class="date">Mon-Fri 9am-6pm</p>
+            </div>
           </div>
-          <div class="col-md-6">
-            <div class="social"><i class="fab fa-facebook"></i><i class="fab fa-twitter"></i><i class="fab fa-github"></i><i class="fab fa-linkedin"></i><i class="fab fa-instagram"></i></div>
+          <div class="d-flex col-md-4">
+            <div class="footer_icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-mail-opened"
+                width="63"
+                height="63"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="#6f32be"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <polyline points="3 9 12 15 21 9 12 3 3 9" />
+                <path d="M21 9v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10" />
+                <line x1="3" y1="19" x2="9" y2="13" />
+                <line x1="15" y1="13" x2="21" y2="19" />
+              </svg>
+            </div>
+            <div class="icon-details">
+              <a href="#" class="a">+1 728365413</a>
+              <p class="date">Mon-Fri 9am-6pm</p>
+            </div>
+          </div>
+          <div class="d-flex col-md-4">
+            <div class="footer_icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-map-2"
+                width="63"
+                height="63"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="#6f32be"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <line x1="18" y1="6" x2="18" y2="6.01" />
+                <path d="M18 13l-3.5 -5a4 4 0 1 1 7 0l-3.5 5" />
+                <polyline
+                  points="10.5 4.75 9 4 3 7 3 20 9 17 15 20 21 17 21 15"
+                />
+                <line x1="9" y1="4" x2="9" y2="17" />
+                <line x1="15" y1="15" x2="15" y2="20" />
+              </svg>
+            </div>
+            <div class="icon-details">
+              <a href="#" class="a">+1 728365413</a>
+              <p class="date">Mon-Fri 9am-6pm</p>
+            </div>
           </div>
         </div>
       </div>
-      </div>
-        <div class=" foot-3 pt-5 bg-dark">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-6 col-lg-6">
-                <h4>Company Name</h4>
-                <hr style="height: .1rem;width:11rem;">
-                <p class="lh-lg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur dolor laborum fugit aperiam? Nam, possimus deserunt exercitationem similique sequi quibusdam est fugit veritatis eaque maxime, quaerat illo dolores, sit aperiam.</p>
-              </div>
-              <div class="col-md-6 col-lg-2">
-                <h4>Products</h4>
-                <hr style="height: .1rem;width:6rem;">
-                <ul class="lh-lg"><li><a href="">lorem ipsum</a></li>
-                <li><a href="">lorem ipsum</a></li>
-                <li><a href="">lorem ipsum</a></li>
-                <li><a href="">lorem ipsum</a></li></ul>
-
-              </div>
-              <div class="col-md-6 col-lg-2">
-                <h4>Useful Links</h4>
-                <hr style="height: .1rem;width:8.4rem;">
-                <ul class="lh-lg"><li><a href="">Your account</a></li>
-                  <li><a href="">become an affiliate</a></li>
-                  <li><a href="">lorem ipsum</a>create an account</li>
-                  <li><a href="">help</a></li></ul>
-  
-
-              </div>
-              <div class="col-md-6 col-lg-2">
-                <h4>Contact</h4>
-                <hr style="height: .1rem;width:5.7rem;">
-                <ul class="lh-lg"><li><a href="">lorem ipsum</a></li>
-                  <li><a href="">lorem ipsum</a></li>
-                  <li><a href="">lorem ipsum</a></li>
-                  <li><a href="">lorem ipsum</a></li></ul>
-  
-
+      <div class="foot-2">
+        <div class="container">
+          <div class="row text-center pt-3 pb-3">
+            <div class="col-md-6 text-white mb-1">
+              connect with us on social media
+            </div>
+            <div class="col-md-6">
+              <div class="social">
+                <i class="fab fa-facebook"></i><i class="fab fa-twitter"></i
+                ><i class="fab fa-github"></i><i class="fab fa-linkedin"></i
+                ><i class="fab fa-instagram"></i>
               </div>
             </div>
           </div>
         </div>
-       <div class="copy">
-        <div class="container">
-          <div class="row text-center pt-4 pb-4"> <p>&copyCopyright 2021 <a href=""> Company</a> | Created by <a href="">Devika</a></p></div>
       </div>
-       </div>
-
-
-
-
+      <div class="foot-3 pt-5 bg-dark">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 col-lg-6">
+              <h4>Company Name</h4>
+              <hr style="height: 0.1rem; width: 11rem" />
+              <p class="lh-lg">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Consequatur dolor laborum fugit aperiam? Nam, possimus deserunt
+                exercitationem similique sequi quibusdam est fugit veritatis
+                eaque maxime, quaerat illo dolores, sit aperiam.
+              </p>
+            </div>
+            <div class="col-md-6 col-lg-2">
+              <h4>Products</h4>
+              <hr style="height: 0.1rem; width: 6rem" />
+              <ul class="lh-lg">
+                <li><a href="">lorem ipsum</a></li>
+                <li><a href="">lorem ipsum</a></li>
+                <li><a href="">lorem ipsum</a></li>
+                <li><a href="">lorem ipsum</a></li>
+              </ul>
+            </div>
+            <div class="col-md-6 col-lg-2">
+              <h4>Useful Links</h4>
+              <hr style="height: 0.1rem; width: 8.4rem" />
+              <ul class="lh-lg">
+                <li><a href="">Your account</a></li>
+                <li><a href="">become an affiliate</a></li>
+                <li><a href="">lorem ipsum</a>create an account</li>
+                <li><a href="">help</a></li>
+              </ul>
+            </div>
+            <div class="col-md-6 col-lg-2">
+              <h4>Contact</h4>
+              <hr style="height: 0.1rem; width: 5.7rem" />
+              <ul class="lh-lg">
+                <li><a href="">lorem ipsum</a></li>
+                <li><a href="">lorem ipsum</a></li>
+                <li><a href="">lorem ipsum</a></li>
+                <li><a href="">lorem ipsum</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="copy">
+        <div class="container">
+          <div class="row text-center pt-4 pb-4">
+            <p>
+              &copyCopyright 2021 <a href=""> Company</a> | Created by
+              <a href="">Devika</a>
+            </p>
+          </div>
+        </div>
+      </div>
 
       <a href="" class="shadow btn-primary rounded-circle backto"
         ><i class="fas fa-angle-up"></i
       ></a>
     </footer>
-    <script src="/js/script.js"></script><!---external script-->
+    <script src="/js/script.js"></script>
+    <!---external script-->
     <!-- bootstrap -->
     <script
-
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
@@ -960,11 +1206,47 @@
         source: "youtube", //vimeo, youtube or local
         width: 900,
       });
+    </script>
+    <!-- tel-input -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-      </script>
-      <!-- onsubmit to excel -->
-<script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 
+    <script>
+      // let currentLocation = window.location;
+
+      const phoneInputField = document.querySelector("#phone");
+      const phoneInput = window.intlTelInput(phoneInputField, {
+        utilsScript:
+          "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+      });
+
+      //       phoneInput.on("countrychange", function() {
+      //   phoneInput.val('')
+      // });
+
+      function insno() {
+        //  alert( document.getElementById("#phone").intlTelInput("getNumber"));
+        // alert(phoneInput.getNumber());
+        let number = phoneInput.getNumber();
+        // alert(number);
+        if (phoneInput.isValidNumber()) {
+          document.querySelector("#resultno").innerText = "";
+          document.getElementById("ph").defaultValue = number;
+          document.getElementById("url").defaultValue = window.location;
+          return true;
+        } else {
+          // phoneInput.intlTelInput();
+          document.querySelector("#resultno").innerText =
+            "Please enter a valid phone number !";
+
+          return false;
+        }
+      }
+    </script>
+
+    <!-- // onsubmit to excel  -->
+    <script>
       const scriptURL =
         "https://script.google.com/macros/s/AKfycbwJp2SWqRut3rybooJdQtYEFUWrbpZlvtDSOGc5htBYJ-Cmj4_vd3AhhC_euPTXR_Au/exec";
       const form = document.forms["myForm"];
@@ -977,58 +1259,95 @@
 
       //     alert("Details successfully entered!...");
       //     document.getElementById("myForm").reset();
-          
+
       // });
 
-
-
       form.addEventListener("submit", (e) => {
-        if(checkEmail()){
-          if(document.querySelector('#Message').value.trim().length>0){
-
-            if(checkMessage()){
+        if (checkEmail() && insno()) {
+          // if (document.querySelector("#Message").value.trim().length > 0) {
+            if (checkMessage()) {
               // alert(document.querySelector('#Message').value);
+              document.querySelector("#danger").style.visibility = "hidden";
+
+              e.preventDefault();
+              fetch(scriptURL, { method: "POST", body: new FormData(form) })
+                .then((response) => console.log("Success!", response))
+                .catch((error) => console.error("Error!", error.message));
+
+              document.querySelector("#success").style.visibility = "visible";
+              document.getElementById("myForm").reset();
+            } else {
+              e.preventDefault();
+
+              document.querySelector("#danger").style.visibility = "visible";
+              // alert("Please provide a valid email address !");
+              document.querySelector("#errmsg").innerText =
+                "Please provide a valid Message !";
+            }
+          }
+          // else {
+          //   e.preventDefault();
+          //   document.querySelector("#danger").style.visibility = "hidden";
+          //   fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          //     .then((response) => console.log("Success!", response))
+          //     .catch((error) => console.error("Error!", error.message));
+
+          //   document.querySelector("#success").style.visibility = "visible";
+          //   document.getElementById("myForm").reset();
+          // }
+        // }
+         else {
+          if(insno()){
             e.preventDefault();
-        fetch(scriptURL, { method: "POST", body: new FormData(form) })
-          .then((response) => console.log("Success!", response))
-          .catch((error) => console.error("Error!", error.message));
+            document.querySelector("#danger").style.visibility = "visible";
+          // if (document.querySelector("#Message").value.trim().length > 0) {
+            if (checkMessage()) {
+              // alert("Please provide a valid email address !");
+              e.preventDefault();
 
-          alert("Details successfully entered!...");
-          document.getElementById("myForm").reset();
-          }
-          else {
-           
-               alert("Please provide a valid Message !");
-              }
-        }
-        else{
-          e.preventDefault();
-        fetch(scriptURL, { method: "POST", body: new FormData(form) })
-          .then((response) => console.log("Success!", response))
-          .catch((error) => console.error("Error!", error.message));
+              document.querySelector("#errmsg").innerText =
+                "Please provide a valid email address !";
+            }
+            else {
+              // alert("Please provide a valid email address msg !");
+              e.preventDefault();
 
-          alert("Details successfully entered!...");
-          document.getElementById("myForm").reset();
-        }
-        }
-        else{
-          if(document.querySelector('#Message').value.trim().length>0)
-          {
-            if(checkMessage()){
-              alert("Please provide a valid email address !");
+              document.querySelector("#errmsg").innerText =
+                "Please provide a valid email address address and Message !";
             }
-            else{
-              alert("Please provide a valid email address and Message !");
+          // }
+        }
+           else if(checkEmail()){
+            e.preventDefault();
+            if (checkMessage()) {
+              // alert("Please provide a valid email address !");
+              e.preventDefault();
+              document.querySelector("#errmsg").innerText =
+                "Please provide a valid phone number !";
+            }
+            else {
+              // alert("Please provide a valid email address msg !");
+              e.preventDefault();
+              document.querySelector("#errmsg").innerText =
+                "Please provide a valid phone number and Message !";
             }
           }
+          //
           else{
-            alert("Please provide a valid email address !");
+            e.preventDefault();
+            document.querySelector("#danger").style.visibility = "visible";
+            if (checkMessage()) {
+              e.preventDefault();
+              // alert("Please provide a valid email address and  !");
+
+            document.querySelector("#errmsg").innerText =
+              "Please provide a valid phone number and email address !";}
+            else{
+            // alert("Please provide a valid email address !");
+            document.querySelector("#errmsg").innerText ="Please provide a valid email address address, Meesage and phone number !";
           }
-          
-        }
+        }}
       });
     </script>
-        
-
   </body>
 </html>
