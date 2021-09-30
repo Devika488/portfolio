@@ -15,9 +15,10 @@
     top: -4.65rem;
 }
 }
-input:invalid,textarea:invalid{
+input:invalid,textarea:invalid,select:invalid{
 	border-color: red;
 }   
+// select:invalid { color: red; }
 .iti{
     width: 100%;
 }

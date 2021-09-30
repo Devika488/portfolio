@@ -25,7 +25,7 @@ function checkEmail() {
 
     // function textarea
     function checkMessage(){
-        // alert("kooi");
+        // alert(document.querySelector('#Message').value.trim().length);
         let msg = document.querySelector('#Message').value.trim();
         if(msg.match(/^.*[a-zA-Z].*$/)){
             document.querySelector('#resultmsg').style.visibility="hidden";
@@ -44,6 +44,20 @@ function checkEmail() {
        
         }
         //
-        function savefile(){
-            alert(document.getElementById('formFile').value);
+        // function savefile(){
+        //     alert(document.getElementById('formFile').value);
+        // }
+
+    //   url validation
+    function checkUrl(){
+        let url=document.querySelector('#urllink').value;
+        if(url.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g))
+        {
+            document.querySelector('#resulturl').style.visibility="hidden";
+            return true;
         }
+        else{
+            document.querySelector('#resulturl').style.visibility="visible";
+            return false;
+        }
+    }

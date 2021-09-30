@@ -11269,6 +11269,9 @@ textarea.form-control-lg {
 .form form .button:hover {
   background: #d122e3;
 }
+.form form #urllink {
+  text-transform: none;
+}
 
 .foot .icon-details .a {
   color: #fff;
@@ -11451,7 +11454,7 @@ textarea.form-control-lg {
   top: -4.65rem;
 }
 
-input:invalid, textarea:invalid {
+input:invalid, textarea:invalid, select:invalid {
   border-color: red;
 }
 

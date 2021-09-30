@@ -24,6 +24,8 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
     />
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light menu-bar shadow">
@@ -835,6 +837,7 @@
               id="myForm"
               name="myForm"
               method="POST"
+              enctype="multipart/form-data" 
               action="index.html#myForm"
             >
               <p class="fs-2 mb-5">Start Your Project</p>
@@ -882,6 +885,7 @@
                       name="Gender"
                       id="male"
                       value="male"
+                      
                       required
                     />
                     <label class="form-check-label" for="male">Male</label>
@@ -915,6 +919,14 @@
                   <input type="hidden" name="ph. Number" id="ph" value="" />
                 </div>
                 <div class="col-12 input-group-lg">
+                  <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="Project Topics" id="topics"  required>
+                    <option  value="" disabled selected>Project Topics</option>
+                    <option value="project topic 1">Lorem ipsum dolor sit amet</option>
+                    <option value="project topic 2">Lorem ipsum dolor sit amet</option>
+                    <option value="project topic 3">Lorem ipsum dolor sit amet</option>
+                  </select>
+                </div>
+                <div class="col-12 input-group-lg">
                   <textarea
                     name="Message"
                     id="Message"
@@ -933,6 +945,23 @@
                 </div>
                 <input type="hidden" name="url" id="url" value="" />
                 <div class="col-12">
+                  <input
+                  type="text"
+                  name="Completed Project url"
+                  class="input-text form-control shadow"
+                  placeholder="Completed Project url ,if any"
+                  onchange="checkUrl()"
+                  id="urllink"
+                />
+                <h2
+                class="text-danger fs-6 "
+                id="resulturl"
+                style="visibility: hidden"
+              >
+                Please provide a valid url !
+              </h2>
+                </div>
+                <div class="col-12">
                   <div class="mb-3">
                     <label for="formFile" class="form-label"
                       >Project Template</label
@@ -941,11 +970,15 @@
                       class="form-control"
                       type="file"
                       name="Doc"
-                      onchange="savefile()"
-                      id="formFile"
+                       id="formFile"
                       accept="application/pdf, application/vnd.ms-excel"
                     />
+                    <!-- onchange="uploadFile()" -->
+
                   </div>
+                  <!-- <progress id="progressBar" value="0" max="100" style="width:100%;"></progress>
+                  <h3 id="status"></h3>
+                  <p id="loaded_n_total"></p> -->
                 </div>
                 <div class="col-12 input-group-lg mb-1">
                   <button
@@ -1244,31 +1277,25 @@
         }
       }
     </script>
-
+    <!-- progress bar file and file upload -->
+<script>
+  // document.querySelector('#formFile').addEventListener('change',function(e){
+  //   google.script.run.uploadFile(this.parentNode)
+  // });
+</script>
     <!-- // onsubmit to excel  -->
     <script>
       const scriptURL =
         "https://script.google.com/macros/s/AKfycbwJp2SWqRut3rybooJdQtYEFUWrbpZlvtDSOGc5htBYJ-Cmj4_vd3AhhC_euPTXR_Au/exec";
       const form = document.forms["myForm"];
 
-      // form.addEventListener("submit", (e) => {
-      //   e.preventDefault();
-      //   fetch(scriptURL, { method: "POST", body: new FormData(form) })
-      //     .then((response) => console.log("Success!", response))
-      //     .catch((error) => console.error("Error!", error.message));
-
-      //     alert("Details successfully entered!...");
-      //     document.getElementById("myForm").reset();
-
-      // });
-
       form.addEventListener("submit", (e) => {
         if (checkEmail() && insno()) {
           // if (document.querySelector("#Message").value.trim().length > 0) {
-            if (checkMessage()) {
+            if (checkMessage()|| document.querySelector('#Message').value.trim().length==0) {
               // alert(document.querySelector('#Message').value);
               document.querySelector("#danger").style.visibility = "hidden";
-
+           
               e.preventDefault();
               fetch(scriptURL, { method: "POST", body: new FormData(form) })
                 .then((response) => console.log("Success!", response))
@@ -1285,26 +1312,16 @@
                 "Please provide a valid Message !";
             }
           }
-          // else {
-          //   e.preventDefault();
-          //   document.querySelector("#danger").style.visibility = "hidden";
-          //   fetch(scriptURL, { method: "POST", body: new FormData(form) })
-          //     .then((response) => console.log("Success!", response))
-          //     .catch((error) => console.error("Error!", error.message));
-
-          //   document.querySelector("#success").style.visibility = "visible";
-          //   document.getElementById("myForm").reset();
-          // }
-        // }
+         
          else {
           if(insno()){
             e.preventDefault();
             document.querySelector("#danger").style.visibility = "visible";
           // if (document.querySelector("#Message").value.trim().length > 0) {
-            if (checkMessage()) {
+            if (checkMessage()|| document.querySelector('#Message').value.trim().length==0) {
               // alert("Please provide a valid email address !");
               e.preventDefault();
-
+              document.querySelector('#resultmsg').style.visibility="hidden";
               document.querySelector("#errmsg").innerText =
                 "Please provide a valid email address !";
             }
@@ -1319,11 +1336,13 @@
         }
            else if(checkEmail()){
             e.preventDefault();
-            if (checkMessage()) {
+            if (checkMessage()|| document.querySelector('#Message').value.trim().length==0) {
               // alert("Please provide a valid email address !");
               e.preventDefault();
               document.querySelector("#errmsg").innerText =
                 "Please provide a valid phone number !";
+                document.querySelector('#resultmsg').style.visibility="hidden";
+
             }
             else {
               // alert("Please provide a valid email address msg !");
@@ -1336,7 +1355,7 @@
           else{
             e.preventDefault();
             document.querySelector("#danger").style.visibility = "visible";
-            if (checkMessage()) {
+            if (checkMessage()|| document.querySelector('#Message').value.trim().length==0) {
               e.preventDefault();
               // alert("Please provide a valid email address and  !");
 
