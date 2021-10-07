@@ -151,6 +151,6 @@ fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fie
   document.getElementById("formFile").value=""; //file input
 
   console.log("filename err");
-  document.getElementById("resultname").innerText="Please enter a valid name";
+  document.getElementById("resultname").innerText="Please enter a valid first name and last name";
 }
 }
