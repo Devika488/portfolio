@@ -1,3 +1,21 @@
+// Variables
+const myform = document.querySelector('#myForm');
+var fname = document.querySelector("#fname").value;
+let lname = document.querySelector("#lname").value;
+let gender = document.getElementsByName("Gender").value;
+let email = document.querySelector("#email").value;
+let phone = document.querySelector("#ph").value; //append formdata
+let topics = document.querySelector("#topics").value;
+let msg = document.querySelector("#Message").value;
+let urllink = document.querySelector("#urllink").value;
+let cururl = document.querySelector("#url").value; //append formdata
+// let drive=document.querySelector('#durl').value;//append formdata
+const scriptURL =
+    "https://script.google.com/macros/s/AKfycbwJp2SWqRut3rybooJdQtYEFUWrbpZlvtDSOGc5htBYJ-Cmj4_vd3AhhC_euPTXR_Au/exec";
+
+let driveurl;
+let driveres;
+
 // mail validation
 
 function checkEmail() {
@@ -66,22 +84,22 @@ function checkUrl() {
 // any code for gapi here
 // generate access token using refresh and refresh the refresh token here
 
-
-var  accessToken;
+var accessToken;
 var xhr = new XMLHttpRequest();
 xhr.open("POST", "https://oauth2.googleapis.com/token");
 xhr.setRequestHeader("Accept", "application/json");
 xhr.setRequestHeader("Content-Type", "application/json");
 
 xhr.onreadystatechange = function () {
-   if (xhr.readyState === 4) {
-      // console.log(xhr.status);
-      // console.log(xhr.responseText);
-      var responseText = JSON.parse(xhr.responseText);
-      // console.log(responseText.access_token);
-      accessToken=responseText.access_token
-      // console.log(accessToken);
-   }};
+  if (xhr.readyState === 4) {
+    // console.log(xhr.status);
+    // console.log(xhr.responseText);
+    var responseText = JSON.parse(xhr.responseText);
+    // console.log(responseText.access_token);
+    accessToken = responseText.access_token;
+    // console.log(accessToken);
+  }
+};
 
 var data = `{
   "client_id":'971475868194-q3gmjhvegvccfdb46sdpj256jpkon09v.apps.googleusercontent.com',
@@ -100,57 +118,310 @@ xhr.send(data);
 // var CLIENT_ID='971475868194-q3gmjhvegvccfdb46sdpj256jpkon09v.apps.googleusercontent.com';
 // var SCOPES='https://www.googleapis.com/auth/drive';
 
-
-
 // uploadFile
+async function uploadFile() {
+  var fname = document.querySelector("#fname").value;
+  let lname = document.querySelector("#lname").value;
+        let name = fname + "_" + lname; 
+        const filecont = document.getElementById("formFile"); //file input
+        var fileContent = filecont.files[0]; // get upload  file.
+        var file = new Blob([fileContent], {
+          type: "application/pdf, application/vnd.ms-excel",
+        });
+        var metadata = {
+          name: name, // Filename at Google Drive
+          mimeType: "application/pdf, application/vnd.ms-excel", // mimeType at Google Drive
+          parents: ["1xm_bK6ytg0Tw5ErHlYQV7cFH3K5zgjJz"], // Folder ID at Google Drive
+        };
+        
+        var form = new FormData();
+        form.append(
+          "metadata",
+          new Blob([JSON.stringify(metadata)], { type: "application/json" })
+        );
+        form.append("file", file);
 
-function uploadFile() {
-  var fname=document.querySelector('#fname').value;
-  let lname=document.querySelector('#lname').value;
-  let name=fname+"_"+lname;// name of file
-  const filecont = document.getElementById("formFile"); //file input
-
-//need to add if stmt if((fname.length!=0 && fname.match(regrex))  && (lname.length!=0 && lname.match(regrex)))
-// let regrex2="/^[^-\s.][a-zA-z .]+$/";
-// let regrex="/^[^-\s][a-zA-Z ]{2,}$/";
-console.log("uploadfile");
-if((fname.length!=0 && fname.match(/^[^-\s][a-zA-Z ]{2,}$/))  && (lname.length!=0 && lname.match(/^[^-\s.][a-zA-z .]+$/))){
+        // console.log(form.get('file'))
+    return fetch(
+            "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=webViewLink",
+            {
+              method: "POST",
+              headers: new Headers({ Authorization: "Bearer " + accessToken }),
+              body: form,
+            }
+          ).then((response) => response.json()).then((val)=>
+          // document.getElementById("durl").value = val)
+          val)
+          .catch((err)=>{console.log(err)});
   
-  document.querySelector("#resultname").innerText="";
+    }
 
-var fileContent = filecont.files[0]; // get upload  file.
-var file = new Blob([fileContent], {type: 'application/pdf, application/vnd.ms-excel'});
-var metadata = {
-    'name': name, // Filename at Google Drive
-    'mimeType': 'application/pdf, application/vnd.ms-excel', // mimeType at Google Drive
-    'parents': ['1xm_bK6ytg0Tw5ErHlYQV7cFH3K5zgjJz'], // Folder ID at Google Drive
-};
+//Form Submission
+myform.addEventListener("submit", async(e) => {
+  // console.log(driveurl);
+  e.preventDefault();
+  if(document.querySelector('#formFile').value.length>0){
+    let upload= await uploadFile();
+    console.log("upload: "+upload);
+    document.getElementById("durl").value = `${JSON.stringify(upload)}`.slice(16,-2);  
+  }
+  if (checkEmail() && insno()) {
+    if (
+      (checkMessage() ||
+        document.querySelector("#Message").value.trim().length == 0) &&
+      (checkUrl() ||
+        document.querySelector("#urllink").value.trim().length == 0)
+    ) {
+      // alert(document.querySelector('#Message').value);
+      document.querySelector("#resultmsg").style.visibility = "hidden";
+      document.querySelector("#danger").style.visibility = "hidden";
+      document.querySelector("#resulturl").style.visibility = "hidden";
+      
+      console.log("durl: "+document.getElementById("durl").value)
+     
+      e.preventDefault();
+      console.log("data submit fetch start");
+      let formdata=new FormData(myform);
+      // formdata.append("Drivelink", `${JSON.stringify(upload)}`);
+      for (let value of formdata.entries()) {
+        console.log(value);
+      }
+      fetch(scriptURL, { method: "POST", body: formdata })
+      .then((response) => console.log("Success!", response))
+      .catch((error) => console.error("Error!", error.message));
 
-// let REFRESH_TOKEN="1//04xxDg0xIKoD4CgYIARAAGAQSNwF-L9IrLXNvNLkCQ_BJGGWjgk5-1QcqIVpHGmqNMkj4unZ4cc6JNZ9QpIrNtWecGYK5LJVb2P0";
+      
+      document.querySelector("#success").style.visibility = "visible";
+      document.getElementById("myForm").reset();
+      document.getElementById("durl").value="";
+    } else {
+      if (
+        checkUrl() ||
+        document.querySelector("#urllink").value.trim().length == 0
+      ) {
+        e.preventDefault();
 
-var form = new FormData();
-form.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
-form.append('file', file);
-fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=webViewLink', {
-    method: 'POST',
-    headers: new Headers({ 'Authorization': 'Bearer ' + accessToken }),
-    body: form,
-}).then((res) => {
-    return res.json();
-  
-}).then(function(val) {
-  //the variable to pass into the hidden input text type name driveurl
-  var driveurl=(`${JSON.stringify(val)}`).slice(16,-2);
-  // alert(driveurl);
+        document.querySelector("#danger").style.visibility = "visible";
+        // alert("Please provide a valid email address !");
+        document.querySelector("#errmsg").innerText =
+          "Please provide a valid Message !";
+      } else if (
+        checkMessage() ||
+        document.querySelector("#Message").value.trim().length == 0
+      ) {
+        e.preventDefault();
+        document.querySelector("#danger").style.visibility = "visible";
+        // alert("Please provide a valid email address !");
+        document.querySelector("#errmsg").innerText =
+          "Please provide a valid url !";
+      } else {
+        e.preventDefault();
+        document.querySelector("#danger").style.visibility = "visible";
+        // alert("Please provide a valid email address !");
+        document.querySelector("#errmsg").innerText =
+          "Please provide a valid url and Message !";
+      }
+    }
+  } else {
+    if (insno()) {
+      e.preventDefault();
+      document.querySelector("#danger").style.visibility = "visible";
+      // if (document.querySelector("#Message").value.trim().length > 0) {
+      if (
+        (checkMessage() ||
+          document.querySelector("#Message").value.trim().length == 0) &&
+        (checkUrl() ||
+          document.querySelector("#urllink").value.trim().length == 0)
+      ) {
+        // alert("Please provide a valid email address !");
+        e.preventDefault();
+        document.querySelector("#resulturl").style.visibility = "hidden";
+        document.querySelector("#resultmsg").style.visibility = "hidden";
+        document.querySelector("#errmsg").innerText =
+          "Please provide a valid email address !";
+      } else {
+        // alert("Please provide a valid email address msg !");
 
-  document.getElementById("driveurl").defaultValue=driveurl;
+        if (
+          checkUrl() ||
+          document.querySelector("#urllink").value.trim().length == 0
+        ) {
+          e.preventDefault();
 
-  console.log(val);
+          document.querySelector("#danger").style.visibility = "visible";
+          // alert("Please provide a valid email address !");
+          document.querySelector("#errmsg").innerText =
+            "Please provide a valid email address and Message !";
+        } else if (
+          checkMessage() ||
+          document.querySelector("#Message").value.trim().length == 0
+        ) {
+          e.preventDefault();
+          document.querySelector("#danger").style.visibility = "visible";
+          // alert("Please provide a valid email address !");
+          document.querySelector("#errmsg").innerText =
+            "Please provide a valid email address and url !";
+        } else {
+          e.preventDefault();
+          document.querySelector("#danger").style.visibility = "visible";
+          // alert("Please provide a valid email address !");
+          document.querySelector("#errmsg").innerText =
+            "Please provide a valid email address , Message and url !";
+        }
+      }
+      // }
+    } else if (checkEmail()) {
+      e.preventDefault();
+      if (
+        (checkMessage() ||
+          document.querySelector("#Message").value.trim().length == 0) &&
+        (checkUrl() ||
+          document.querySelector("#urllink").value.trim().length == 0)
+      ) {
+        // alert("Please provide a valid email address !");
+        e.preventDefault();
+        document.querySelector("#resulturl").style.visibility = "hidden";
+        document.querySelector("#errmsg").innerText =
+          "Please provide a valid phone number !";
+        document.querySelector("#resultmsg").style.visibility = "hidden";
+      } else {
+        // alert("Please provide a valid email address msg !");
+
+        if (
+          checkUrl() ||
+          document.querySelector("#urllink").value.trim().length == 0
+        ) {
+          e.preventDefault();
+
+          document.querySelector("#danger").style.visibility = "visible";
+          // alert("Please provide a valid email address !");
+          document.querySelector("#errmsg").innerText =
+            "Please provide a valid phone number and Message !";
+        } else if (
+          checkMessage() ||
+          document.querySelector("#Message").value.trim().length == 0
+        ) {
+          e.preventDefault();
+          document.querySelector("#danger").style.visibility = "visible";
+          // alert("Please provide a valid email address !");
+          document.querySelector("#errmsg").innerText =
+            "Please provide a valid phone number and url !";
+        } else {
+          e.preventDefault();
+          document.querySelector("#danger").style.visibility = "visible";
+          // alert("Please provide a valid email address !");
+          document.querySelector("#errmsg").innerText =
+            "Please provide a valid phone number, Message and url !";
+        }
+      }
+    } else {
+      e.preventDefault();
+      document.querySelector("#danger").style.visibility = "visible";
+      if (
+        (checkMessage() ||
+          document.querySelector("#Message").value.trim().length == 0) &&
+        (checkUrl() ||
+          document.querySelector("#urllink").value.trim().length == 0)
+      ) {
+        e.preventDefault();
+        // alert("Please provide a valid email address and  !");
+        document.querySelector("#resultmsg").style.visibility = "hidden";
+        document.querySelector("#resulturl").style.visibility = "hidden";
+        document.querySelector("#errmsg").innerText =
+          "Please provide a valid phone number and email address !";
+      } else {
+        // alert("Please provide a valid email address !");
+        if (
+          checkUrl() ||
+          document.querySelector("#urllink").value.trim().length == 0
+        ) {
+          e.preventDefault();
+
+          document.querySelector("#danger").style.visibility = "visible";
+          // alert("Please provide a valid email address !");
+          document.querySelector("#errmsg").innerText =
+            "Please provide a valid email address, Message and phone number !";
+        } else if (
+          checkMessage() ||
+          document.querySelector("#Message").value.trim().length == 0
+        ) {
+          e.preventDefault();
+          document.querySelector("#danger").style.visibility = "visible";
+          // alert("Please provide a valid email address !");
+          document.querySelector("#errmsg").innerText =
+            "Please provide a valid email address, url and phone number !";
+        } else {
+          e.preventDefault();
+          document.querySelector("#danger").style.visibility = "visible";
+          // alert("Please provide a valid email address !");
+          document.querySelector("#errmsg").innerText =
+            "Please provide a valid email address address, Message, url and phone number !";
+        }
+      }
+    }
+  }
 });
-}else{
-  document.getElementById("formFile").value=""; //file input
 
-  console.log("filename err");
-  document.getElementById("resultname").innerText="Please enter a valid first name and last name";
+//onchange check file type and username
+
+// File Upload Only
+
+function filetype() {
+  var fname = document.querySelector("#fname").value;
+  let lname = document.querySelector("#lname").value;
+  var fileInput = document.getElementById("formFile");
+  console.log(fname);
+  // console.log(fileInput.files[0].type);
+  if (fileInput.value.length != 0) {
+    if (
+      fname.length != 0 &&
+      fname.match(/^[^-\s][a-zA-Z ]{2,}$/) &&
+      lname.length != 0 &&
+      lname.match(/^[^-\s.][a-zA-z .]{0,}$/)
+    ) {
+      document.querySelector("#resultname").innerText = "";
+      var ftype = fileInput.files[0].type;
+      // file type checking
+      // var allowedExtensions =new RegExp("application/pdf","application/xls*");
+      if (ftype != "application/pdf" && ftype != "application/vnd.ms-excel") {
+        document.getElementById("resultftype").innerText =
+          "Invalid file extention please select another file";
+        fileInput.value = "";
+        return false;
+      } else {
+        // fileInput.value=""; //file input
+        // uploadFile();
+        document.getElementById("resultftype").innerText = "";
+        return true;
+      }
+    } else {
+      fileInput.value = ""; //file input
+
+      console.log("filename err");
+      document.getElementById("resultname").innerText =
+        "Please enter a valid first name and last name";
+      return false;
+    }
+  } else {
+    console.log("no file "); //48,-20
+
+    return true;
+  }
 }
-}
+
+//submitdata
+
+//  async function submitdata(){
+//           uploadFile();
+//    try{ e.preventDefault();
+//    const response=await fetch(scriptURL, { method: "POST", body: new FormData(form) })
+//    console.log("Success!", response);
+//   //  const res=response.json();
+//   }
+//       // .then((response) => console.log("Success!", response))
+//       catch(error){console.error("Error!", error.message));}
+//       // .catch((error) => console.error("Error!", error.message));
+//       document.querySelector("#success").style.visibility = "visible";
+//     document.getElementById("myForm").reset();
+
+//

@@ -861,7 +861,7 @@
                     id="lname"
                     class="input-text form-control shadow"
                     placeholder="Last Name"
-                    pattern="[^-\s.][a-zA-z .]+"
+                    pattern="[^-\s.][a-zA-z .]{0,}"
                     title="Enter a valid name"
                     required
                   />
@@ -926,6 +926,8 @@
                   <h2 class="text-danger fs-6" id="resultno"></h2>
 
                   <input type="hidden" name="ph. Number" id="ph" value="" />
+                  <input type="hidden" name="Drive" id="durl" value="" />
+
                 </div>
                 <div class="col-12 input-group-lg">
                   <select
@@ -992,12 +994,18 @@
                       type="file"
                       name="Doc1"
                       id="formFile"
-                      onchange="uploadFile()"
+                      onchange="filetype()"
                       accept="application/pdf, application/vnd.ms-excel"
-                    />
+                    />                  
+                      <!-- <input type="text" name="Drive" id="durl" value=""/> -->
+
                     <h2 class="text-danger fs-6" id="drive">File type:pdf/ms-excel</h2>
+                    <h2
+                    class="text-danger fs-6"
+                    id="resultftype"
+                  >
+                  </h2>
                     <h2 class="text-danger fs-6" id="resultname"></h2>
-                    <input type="hidden" name="Doc" id="driveurl"/>
                     <!-- onchange="uploadFile()" -->
                   </div>
                   <!-- progress bar file upload but file upload not working -->
@@ -1311,246 +1319,8 @@
       }
     </script>
     <!-- progress bar file and file upload -->
-    <script>
-      // document.querySelector('#formFile').addEventListener('change',function(e){
-      //   google.script.run.uploadFile(this.parentNode)
-      // });
-
-      // new code for file upload but error leran more
-
-      // const scriptURLfile =
-      //       "https://script.google.com/macros/s/AKfycbwSid9GMRX1WWFak4OXUKDRzA5p5aKmPzbjDzn_I3L2SqCRve_LX3UI9VE4PzLUaSqU/exec";
-      //     const uploadfile = document.querySelector('#formFile');
-
-      //     uploadfile.addEventListener("change", function() {
-      //       var file = this.files[0];
-      //       var fr = new FileReader();
-      //       fr.fileName = file.name;
-      //       fr.onload = function(e) {
-      //           e.target.result
-      //           html = '<input type="hidden" name="data" value="' + e.target.result.replace(/^.*,/, '') + '" >';
-      //           html += '<input type="hidden" name="mimetype" value="' + e.target.result.match(/^.*(?=;)/)[0] + '" >';
-      //           html += '<input type="hidden" name="filename" value="' + e.target.fileName + '" >';
-      //           $("#data").empty().append(html);
-      //       }
-      //       fr.readAsDataURL(file);
-      //   });
-
-// another code on 01/10/21 latest
-          // const uploadfile = document.querySelector('#formFile');
-          // uploadfile.addEventListener("change",function(e){
-          //     console.log(uploadfile.files);
-          //     const read=new FileReader();
-          //   read.onload=function(){
-          //     console.log(read.result);
-          //   }
-          // });
-//latest code 04/10/21 script js
-
-
-
-
-
-    </script>
+    
     <!-- // onsubmit to excel  -->
-    <script>
-      const scriptURL =
-        "https://script.google.com/macros/s/AKfycbwJp2SWqRut3rybooJdQtYEFUWrbpZlvtDSOGc5htBYJ-Cmj4_vd3AhhC_euPTXR_Au/exec";
-      const form = document.forms["myForm"];
-
-      form.addEventListener("submit", (e) => {
-        // if(document.querySelector('#fname'.style.borderColor=="red")){
-        //   document.querySelector('#resultfname').style.visibility="visible";
-        // }
-        if (checkEmail() && insno()) {
-          // if (document.querySelector("#Message").value.trim().length > 0) {
-          if (
-            (checkMessage() ||
-              document.querySelector("#Message").value.trim().length == 0) &&
-            (checkUrl() ||
-              document.querySelector("#urllink").value.trim().length == 0)
-          ) {
-            // alert(document.querySelector('#Message').value);
-            document.querySelector("#resultmsg").style.visibility = "hidden";
-            document.querySelector("#danger").style.visibility = "hidden";
-            document.querySelector("#resulturl").style.visibility = "hidden";
-
-            e.preventDefault();
-            fetch(scriptURL, { method: "POST", body: new FormData(form) })
-              .then((response) => console.log("Success!", response))
-              .catch((error) => console.error("Error!", error.message));
-
-            document.querySelector("#success").style.visibility = "visible";
-            document.getElementById("myForm").reset();
-          } else {
-            if (
-              checkUrl() ||
-              document.querySelector("#urllink").value.trim().length == 0
-            ) {
-              e.preventDefault();
-
-              document.querySelector("#danger").style.visibility = "visible";
-              // alert("Please provide a valid email address !");
-              document.querySelector("#errmsg").innerText =
-                "Please provide a valid Message !";
-            } else if (
-              checkMessage() ||
-              document.querySelector("#Message").value.trim().length == 0
-            ) {
-              e.preventDefault();
-              document.querySelector("#danger").style.visibility = "visible";
-              // alert("Please provide a valid email address !");
-              document.querySelector("#errmsg").innerText =
-                "Please provide a valid url !";
-            } else {
-              e.preventDefault();
-              document.querySelector("#danger").style.visibility = "visible";
-              // alert("Please provide a valid email address !");
-              document.querySelector("#errmsg").innerText =
-                "Please provide a valid url and Message !";
-            }
-          }
-        } else {
-          if (insno()) {
-            e.preventDefault();
-            document.querySelector("#danger").style.visibility = "visible";
-            // if (document.querySelector("#Message").value.trim().length > 0) {
-            if (
-              (checkMessage() ||
-                document.querySelector("#Message").value.trim().length == 0) &&
-              (checkUrl() ||
-                document.querySelector("#urllink").value.trim().length == 0)
-            ) {
-              // alert("Please provide a valid email address !");
-              e.preventDefault();
-              document.querySelector("#resulturl").style.visibility = "hidden";
-              document.querySelector("#resultmsg").style.visibility = "hidden";
-              document.querySelector("#errmsg").innerText =
-                "Please provide a valid email address !";
-            } else {
-              // alert("Please provide a valid email address msg !");
-
-              if (
-                checkUrl() ||
-                document.querySelector("#urllink").value.trim().length == 0
-              ) {
-                e.preventDefault();
-
-                document.querySelector("#danger").style.visibility = "visible";
-                // alert("Please provide a valid email address !");
-                document.querySelector("#errmsg").innerText =
-                  "Please provide a valid email address and Message !";
-              } else if (
-                checkMessage() ||
-                document.querySelector("#Message").value.trim().length == 0
-              ) {
-                e.preventDefault();
-                document.querySelector("#danger").style.visibility = "visible";
-                // alert("Please provide a valid email address !");
-                document.querySelector("#errmsg").innerText =
-                  "Please provide a valid email address and url !";
-              } else {
-                e.preventDefault();
-                document.querySelector("#danger").style.visibility = "visible";
-                // alert("Please provide a valid email address !");
-                document.querySelector("#errmsg").innerText =
-                  "Please provide a valid email address , Message and url !";
-              }
-            }
-            // }
-          } else if (checkEmail()) {
-            e.preventDefault();
-            if (
-              (checkMessage() ||
-                document.querySelector("#Message").value.trim().length == 0) &&
-              (checkUrl() ||
-                document.querySelector("#urllink").value.trim().length == 0)
-            ) {
-              // alert("Please provide a valid email address !");
-              e.preventDefault();
-              document.querySelector("#resulturl").style.visibility = "hidden";
-              document.querySelector("#errmsg").innerText =
-                "Please provide a valid phone number !";
-              document.querySelector("#resultmsg").style.visibility = "hidden";
-            } else {
-              // alert("Please provide a valid email address msg !");
-
-              if (
-                checkUrl() ||
-                document.querySelector("#urllink").value.trim().length == 0
-              ) {
-                e.preventDefault();
-
-                document.querySelector("#danger").style.visibility = "visible";
-                // alert("Please provide a valid email address !");
-                document.querySelector("#errmsg").innerText =
-                  "Please provide a valid phone number and Message !";
-              } else if (
-                checkMessage() ||
-                document.querySelector("#Message").value.trim().length == 0
-              ) {
-                e.preventDefault();
-                document.querySelector("#danger").style.visibility = "visible";
-                // alert("Please provide a valid email address !");
-                document.querySelector("#errmsg").innerText =
-                  "Please provide a valid phone number and url !";
-              } else {
-                e.preventDefault();
-                document.querySelector("#danger").style.visibility = "visible";
-                // alert("Please provide a valid email address !");
-                document.querySelector("#errmsg").innerText =
-                  "Please provide a valid phone number, Message and url !";
-              }
-            }
-          }
-          //
-          else {
-            e.preventDefault();
-            document.querySelector("#danger").style.visibility = "visible";
-            if (
-              (checkMessage() ||
-                document.querySelector("#Message").value.trim().length == 0) &&
-              (checkUrl() ||
-                document.querySelector("#urllink").value.trim().length == 0)
-            ) {
-              e.preventDefault();
-              // alert("Please provide a valid email address and  !");
-              document.querySelector("#resultmsg").style.visibility = "hidden";
-              document.querySelector("#resulturl").style.visibility = "hidden";
-              document.querySelector("#errmsg").innerText =
-                "Please provide a valid phone number and email address !";
-            } else {
-              // alert("Please provide a valid email address !");
-              if (
-                checkUrl() ||
-                document.querySelector("#urllink").value.trim().length == 0
-              ) {
-                e.preventDefault();
-
-                document.querySelector("#danger").style.visibility = "visible";
-                // alert("Please provide a valid email address !");
-                document.querySelector("#errmsg").innerText =
-                  "Please provide a valid email address, Message and phone number !";
-              } else if (
-                checkMessage() ||
-                document.querySelector("#Message").value.trim().length == 0
-              ) {
-                e.preventDefault();
-                document.querySelector("#danger").style.visibility = "visible";
-                // alert("Please provide a valid email address !");
-                document.querySelector("#errmsg").innerText =
-                  "Please provide a valid email address, url and phone number !";
-              } else {
-                e.preventDefault();
-                document.querySelector("#danger").style.visibility = "visible";
-                // alert("Please provide a valid email address !");
-                document.querySelector("#errmsg").innerText =
-                  "Please provide a valid email address address, Message, url and phone number !";
-              }
-            }
-          }
-        }
-      });
-    </script>
+    
   </body>
 </html>
